@@ -9,10 +9,10 @@ int main(int argc, char *argv[]) {
 
   if (pid == 0) {
     // child
-    sleep(10);
+    exit(1);
   } else if (pid > 0) {
     // parent
-    exit(0);
+    sleep(10);
   }
 
   return 0;
