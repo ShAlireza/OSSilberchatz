@@ -5,4 +5,4 @@ main.o: main.c
 	gcc -c main.c
 
 clean: 
-	rm -f copy main.o
+	rm -f zombie main.o
