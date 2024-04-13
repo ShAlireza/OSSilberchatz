@@ -3,6 +3,8 @@
 
 typedef char * token;
 
+#define PATH_ENV "PATH"
+
 // PATH
 // bash script.sh -c -y -x -> tokens=[bash, script.sh, -x, -y, -z]
 // search for bash in PATH and current directory
