@@ -2,13 +2,17 @@
 #ifndef UTILS_HEADER_H
 #define UTILS_HEADER_H
 
-typedef struct {
-  char *key;
-  char *value;
-} token;
+char **split(char *str, int *ret_size);
 
-unsigned char numbers[16] = {1, 2, 3, 4, 5, 6, 7, 8, 9 ,10, 11, 12, 13, 14, 15, 16};
+char *read_env(char *name, char *def);
 
-token *test = (token *)numbers;
+char *concat_strings(char *first, char *second);
+
+bool file_exists(char *dir_path, char *file_name);
+
+char *sub_string(const char *str, int start, int end);
+
+char *find_binary(char *paths, char *file_name);
+
 
 #endif

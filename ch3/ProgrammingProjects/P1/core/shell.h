@@ -16,4 +16,6 @@ typedef char * token;
 // user uses redirection -> bash script.sh > out.txt
 // TODO
 
+void run();
+
 #endif
