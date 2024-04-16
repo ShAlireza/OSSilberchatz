@@ -4,8 +4,9 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <string.h>
-#include <stdbool.h>
 #include <sys/wait.h>
+#include <ctype.h>
+#include <time.h>
 
 #include "utils.h"
 
@@ -114,4 +115,66 @@ char *find_binary(char *paths, char *file_name) {
   return NULL;
 }
 
+void replace_substring(char *source, const char *target, const char *replacement) {
+    char buffer[1024];
+    char *insert_point = buffer;
+    const char *tmp = source; 
+    size_t target_len = strlen(target);
+    size_t repl_len = strlen(replacement);
 
+    while (1) {
+        const char *p = strstr(tmp, target);
+
+        if (p == NULL) {
+            strcpy(insert_point, tmp);
+            insert_point += strlen(tmp);
+            break;
+        }
+
+        memcpy(insert_point, tmp, p - tmp);
+        insert_point += p - tmp;
+
+        memcpy(insert_point, replacement, repl_len);
+        insert_point += repl_len;
+
+        tmp = p + target_len;
+    }
+
+    *insert_point = '\0';
+    strcpy(source, buffer);
+}
+
+
+char *get_current_time() {
+  time_t now;
+  struct tm *local_time;
+
+  now = time(NULL);
+  local_time = localtime(&now);
+
+  char *time_str = (char *)malloc(9);
+  strftime(time_str, 9, "%H:%M:%S", local_time);
+
+
+  return time_str; 
+}
+
+
+char *ltrim(char *s)
+{
+    while(isspace(*s)) s++;
+    return s;
+}
+
+char *rtrim(char *s)
+{
+    char* back = s + strlen(s);
+    while(isspace(*--back));
+    *(back+1) = '\0';
+    return s;
+}
+
+char *trim(char *s)
+{
+    return rtrim(ltrim(s)); 
+}

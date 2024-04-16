@@ -4,6 +4,7 @@
 typedef char * token;
 
 #define PATH_ENV "PATH"
+#define INPUT_SIZE 1024
 
 // PATH
 // bash script.sh -c -y -x -> tokens=[bash, script.sh, -x, -y, -z]
